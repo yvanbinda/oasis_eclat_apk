@@ -1,4 +1,4 @@
-# getx_shorebired
+# oasisEclat_app
 
 A new Flutter project.
 

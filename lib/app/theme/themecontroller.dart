@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:getx_shorebired/app/theme/darkTheme.dart';
-import 'package:getx_shorebired/app/theme/lightTheme.dart';
-import 'package:getx_shorebired/core/app/constants.dart';
+import 'package:oasis_eclat/app/theme/darkTheme.dart';
+import 'package:oasis_eclat/app/theme/lightTheme.dart';
+import 'package:oasis_eclat/core/app/constants.dart';
 
 class ThemeController extends GetxController {
   var isDarkMode =  true.obs;
