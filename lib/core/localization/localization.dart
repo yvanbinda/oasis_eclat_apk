@@ -7,8 +7,7 @@ class Languages extends Translations {
 
     },
     'en_US': {
-      "label_login": "Login",
-      "Label_email": "Name"
+
     }
   };
 }

@@ -14,7 +14,6 @@ class CostumInput extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey[50],
           borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(color: Colors.grey[300]!),
         ),
         width: double.infinity,
         child: Column(

@@ -41,6 +41,14 @@ dependencies:
   flutter_native_splash: ^2.4.4
   flutter_launcher_icons: ^0.14.3
   get_storage: ^2.1.1
+  flutter_svg: ^2.1.0
+  sqflite: ^2.4.1
+  path: ^1.9.0
+  flutter_local_notifications: ^19.2.1
+  shared_preferences: ^2.5.3
+  timezone: ^0.10.1
+  intl: ^0.20.2
+
 
 flutter_icons:
   android: true
@@ -71,6 +79,7 @@ flutter:
   assets:
     - shorebird.yaml
     - assets/
+    - assets/SVG/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

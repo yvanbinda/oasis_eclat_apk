@@ -1,0 +1,374 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oasis_eclat/features/app/controllers/homeController.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+class AddCustomer extends StatefulWidget {
+  const AddCustomer({super.key});
+
+  @override
+  State<AddCustomer> createState() => _AddCustomerState();
+}
+
+class _AddCustomerState extends State<AddCustomer> {
+  final _formKey = GlobalKey<FormState>();
+  final HomeController _homeController = Get.find<HomeController>();
+
+  // Text editing controllers
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _serviceController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+
+  // Date and time
+  DateTime _selectedDateTime = DateTime.now();
+  bool _isCleaned = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _serviceController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectDateTime() async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDateTime,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    );
+
+    if (pickedDate != null) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.fromDateTime(_selectedDateTime),
+      );
+
+      if (pickedTime != null) {
+        setState(() {
+          _selectedDateTime = DateTime(
+            pickedDate.year,
+            pickedDate.month,
+            pickedDate.day,
+            pickedTime.hour,
+            pickedTime.minute,
+          );
+        });
+      }
+    }
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year} at ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
+
+  void _submitForm() async {
+    if (_formKey.currentState!.validate()) {
+      await _homeController.addCustomer(
+        customerName: _nameController.text.trim(),
+        service: _serviceController.text.trim(),
+        address: _addressController.text.trim(),
+        phone: _phoneController.text.trim(),
+        dateTime: _selectedDateTime.toIso8601String(),
+        amountToBePaid: double.tryParse(_amountController.text.trim()) ?? 0.0,
+        isCleaned: _isCleaned,
+      );
+
+      // Navigate back if successful
+      if (!_homeController.isAddingCustomer.value) {
+        Get.back();
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Customer'),
+        backgroundColor: Colors.teal.shade600,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Container(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 2.h),
+
+                  // Customer Name Field
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Customer Name',
+                        hintText: 'Enter customer name',
+                        prefixIcon: Icon(Icons.person, color: Colors.orange.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter the customer name';
+                        }
+                        if (value.trim().length < 2) {
+                          return 'Customer name must be at least 2 characters';
+                        }
+                        return null;
+                      },
+                      textCapitalization: TextCapitalization.words,
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Service Field
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: _serviceController,
+                      decoration: InputDecoration(
+                        labelText: 'Service',
+                        hintText: 'e.g., Residential Cleaning',
+                        prefixIcon: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter the service type';
+                        }
+                        return null;
+                      },
+                      textCapitalization: TextCapitalization.words,
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Phone Field
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        hintText: 'e.g., +1 234 567 8900',
+                        prefixIcon: Icon(Icons.phone, color: Colors.orange.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter the phone number';
+                        }
+                        if (value.trim().length < 10) {
+                          return 'Please enter a valid phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Address Field
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: _addressController,
+                      maxLines: 2,
+                      decoration: InputDecoration(
+                        labelText: 'Address',
+                        hintText: 'Enter service address',
+                        prefixIcon: Icon(Icons.location_on, color: Colors.orange.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter the service address';
+                        }
+                        return null;
+                      },
+                      textCapitalization: TextCapitalization.words,
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Amount Field
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: _amountController,
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      decoration: InputDecoration(
+                        labelText: 'Amount to be Paid',
+                        hintText: 'e.g., 150.00',
+                        prefixIcon: Icon(Icons.attach_money, color: Colors.orange.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter the amount';
+                        }
+                        final amount = double.tryParse(value.trim());
+                        if (amount == null) {
+                          return 'Please enter a valid amount';
+                        }
+                        if (amount <= 0) {
+                          return 'Amount must be greater than 0';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Date and Time Picker
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.event, color: Colors.orange.shade600),
+                        title: const Text('Service Date & Time'),
+                        subtitle: Text(_formatDateTime(_selectedDateTime)),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: _selectDateTime,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 1.h),
+
+                  // Payment Status Switch
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SwitchListTile(
+                        secondary: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
+                        title: const Text('Status de Nettoyage'),
+                        subtitle: Text(_isCleaned ? 'Nettoyer' : 'En Ettente'),
+                        value: _isCleaned,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _isCleaned = value;
+                          });
+                        },
+                        activeColor: Colors.teal.shade600,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 3.h),
+
+                  // Action Buttons
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Obx(() => ElevatedButton(
+                            onPressed: _homeController.isAddingCustomer.value ? null : _submitForm,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal.shade600,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: _homeController.isAddingCustomer.value
+                                ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                                : const Text(
+                              'Add Customer',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          )),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: _homeController.isAddingCustomer.value ? null : () => Get.back(),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.grey.shade700,
+                              side: BorderSide(color: Colors.grey.shade400),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
