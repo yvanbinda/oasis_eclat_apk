@@ -39,6 +39,10 @@ class HomePage extends StatelessWidget {
                 case 'schedule_notifications':
                   homeController.scheduleAllNotifications();
                   break;
+
+                // case 'delete_all':
+                //   homeController.deleteCustomer();
+                //   break;
               }
             },
             itemBuilder: (BuildContext context) => [

@@ -112,8 +112,8 @@ class _AddCustomerState extends State<AddCustomer> {
                     child: TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Customer Name',
-                        hintText: 'Enter customer name',
+                        labelText: 'Nom du client',
+                        hintText: 'Entrez le nom du client',
                         prefixIcon: Icon(Icons.person, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -144,7 +144,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       controller: _serviceController,
                       decoration: InputDecoration(
                         labelText: 'Service',
-                        hintText: 'e.g., Residential Cleaning',
+                        hintText: 'e.g., Nettoyage Residentielle',
                         prefixIcon: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -155,7 +155,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter the service type';
+                          return 'Entrez le type de service';
                         }
                         return null;
                       },
@@ -172,7 +172,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                        labelText: 'Phone Number',
+                        labelText: 'Numeros de telephone',
                         hintText: 'e.g., +1 234 567 8900',
                         prefixIcon: Icon(Icons.phone, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
@@ -331,7 +331,7 @@ class _AddCustomerState extends State<AddCustomer> {
                               ),
                             )
                                 : const Text(
-                              'Add Customer',
+                              'Ajouter',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -352,7 +352,7 @@ class _AddCustomerState extends State<AddCustomer> {
                               ),
                             ),
                             child: const Text(
-                              'Cancel',
+                              'Annuler',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

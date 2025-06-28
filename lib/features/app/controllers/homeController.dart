@@ -280,10 +280,10 @@ class HomeController extends GetxController {
 
     // Apply payment status filter
     switch (selectedCustomerFilter.value) {
-      case 'Cleaned':
+      case 'Nettoyer':
         filtered = filtered.where((customer) => customer.isCleaned).toList();
         break;
-      case 'Uncleaned':
+      case 'En Attente':
         filtered = filtered.where((customer) => !customer.isCleaned).toList();
         break;
     }

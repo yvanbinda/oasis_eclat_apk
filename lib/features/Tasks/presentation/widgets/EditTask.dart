@@ -359,7 +359,7 @@ class _EditCustFormState extends State<EditCustForm> {
                             ),
                           )
                               : const Text(
-                            'Update Customer',
+                            'Ajouter',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -380,7 +380,7 @@ class _EditCustFormState extends State<EditCustForm> {
                             ),
                           ),
                           child: const Text(
-                            'Cancel',
+                            'Annuler',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
