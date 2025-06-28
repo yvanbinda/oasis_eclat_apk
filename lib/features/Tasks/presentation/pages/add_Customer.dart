@@ -90,7 +90,7 @@ class _AddCustomerState extends State<AddCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Customer'),
+        title:  Text('Add Customer'.tr),
         backgroundColor: Colors.teal.shade600,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -112,8 +112,8 @@ class _AddCustomerState extends State<AddCustomer> {
                     child: TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Nom du client',
-                        hintText: 'Entrez le nom du client',
+                        labelText: 'Nom du client'.tr,
+                        hintText: 'Entrez le nom du client'.tr,
                         prefixIcon: Icon(Icons.person, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -124,10 +124,10 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter the customer name';
+                          return 'Please enter the customer name'.tr;
                         }
                         if (value.trim().length < 2) {
-                          return 'Customer name must be at least 2 characters';
+                          return 'Customer name must be at least 2 characters'.tr;
                         }
                         return null;
                       },
@@ -143,8 +143,8 @@ class _AddCustomerState extends State<AddCustomer> {
                     child: TextFormField(
                       controller: _serviceController,
                       decoration: InputDecoration(
-                        labelText: 'Service',
-                        hintText: 'e.g., Nettoyage Residentielle',
+                        labelText: 'Service'.tr,
+                        hintText: 'e.g., Nettoyage Residentielle'.tr,
                         prefixIcon: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -155,7 +155,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Entrez le type de service';
+                          return 'Entrez le type de service'.tr;
                         }
                         return null;
                       },
@@ -172,7 +172,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                        labelText: 'Numeros de telephone',
+                        labelText: 'Numeros de telephone'.tr,
                         hintText: 'e.g., +1 234 567 8900',
                         prefixIcon: Icon(Icons.phone, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
@@ -184,10 +184,10 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter the phone number';
+                          return 'Please enter the phone number'.tr;
                         }
                         if (value.trim().length < 10) {
-                          return 'Please enter a valid phone number';
+                          return 'Please enter a valid phone number'.tr;
                         }
                         return null;
                       },
@@ -203,8 +203,8 @@ class _AddCustomerState extends State<AddCustomer> {
                       controller: _addressController,
                       maxLines: 2,
                       decoration: InputDecoration(
-                        labelText: 'Address',
-                        hintText: 'Enter service address',
+                        labelText: 'Address'.tr,
+                        hintText: 'Enter service address'.tr,
                         prefixIcon: Icon(Icons.location_on, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -215,7 +215,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter the service address';
+                          return 'Please enter the service address'.tr;
                         }
                         return null;
                       },
@@ -232,7 +232,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       controller: _amountController,
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
-                        labelText: 'Amount to be Paid',
+                        labelText: 'Amount to be Paid'.tr,
                         hintText: 'e.g., 150.00',
                         prefixIcon: Icon(Icons.attach_money, color: Colors.orange.shade600),
                         border: OutlineInputBorder(
@@ -244,14 +244,14 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter the amount';
+                          return 'Please enter the amount'.tr;
                         }
                         final amount = double.tryParse(value.trim());
                         if (amount == null) {
-                          return 'Please enter a valid amount';
+                          return 'Please enter a valid amount'.tr;
                         }
                         if (amount <= 0) {
-                          return 'Amount must be greater than 0';
+                          return 'Amount must be greater than 0'.tr;
                         }
                         return null;
                       },
@@ -270,7 +270,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       child: ListTile(
                         leading: Icon(Icons.event, color: Colors.orange.shade600),
-                        title: const Text('Service Date & Time'),
+                        title: Text('Service Date & Time'.tr),
                         subtitle: Text(_formatDateTime(_selectedDateTime)),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: _selectDateTime,
@@ -290,8 +290,8 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       child: SwitchListTile(
                         secondary: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
-                        title: const Text('Status de Nettoyage'),
-                        subtitle: Text(_isCleaned ? 'Nettoyer' : 'En Ettente'),
+                        title:  Text('Status de Nettoyage'.tr),
+                        subtitle: Text(_isCleaned ? 'Nettoyer'.tr : 'En Ettente'.tr),
                         value: _isCleaned,
                         onChanged: (bool value) {
                           setState(() {
@@ -330,8 +330,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                                : const Text(
-                              'Ajouter',
+                                :  Text(
+                              'Ajouter'.tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -351,8 +351,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            child: const Text(
-                              'Annuler',
+                            child: Text(
+                              'Annuler'.tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

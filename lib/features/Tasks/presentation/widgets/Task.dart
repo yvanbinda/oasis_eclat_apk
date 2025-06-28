@@ -184,22 +184,22 @@ class CustomerCard extends StatelessWidget {
             ),
             itemBuilder: (context) => [
               _buildPopupMenuItem(
-                'edit',
+                'edit'.tr,
                 Icons.edit,
-                'Edit Customer',
+                'Edit Customer'.tr,
                 Colors.blue,
               ),
               _buildPopupMenuItem(
-                'notify',
+                'notify'.tr,
                 Icons.notifications_outlined,
                 'Test Notification',
                 Colors.orange,
               ),
               const PopupMenuDivider(),
               _buildPopupMenuItem(
-                'delete',
+                'delete'.tr,
                 Icons.delete_outline,
-                'Delete Customer',
+                'Delete Customer'.tr,
                 Colors.red,
               ),
             ],
@@ -322,7 +322,7 @@ class CustomerCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                customer.isCleaned ? 'Nettoyer' : 'En Attente',
+                                customer.isCleaned ? 'Nettoyer'.tr : 'En Attente'.tr,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
@@ -341,15 +341,15 @@ class CustomerCard extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Details Section
-                  _buildDetailRow(Icons.cleaning_services, 'Service', customer.service),
+                  _buildDetailRow(Icons.cleaning_services, 'Service'.tr, customer.service),
                   const SizedBox(height: 16),
-                  _buildDetailRow(Icons.phone, 'Phone', customer.phone),
+                  _buildDetailRow(Icons.phone, 'Phone'.tr, customer.phone),
                   const SizedBox(height: 16),
-                  _buildDetailRow(Icons.location_on, 'Address', customer.address),
+                  _buildDetailRow(Icons.location_on, 'Address'.tr, customer.address),
                   const SizedBox(height: 16),
-                  _buildDetailRow(Icons.access_time, 'Date & Time', _formatDateTime(customer.dateTime)),
+                  _buildDetailRow(Icons.access_time, 'Date & Time'.tr, _formatDateTime(customer.dateTime)),
                   const SizedBox(height: 16),
-                  _buildDetailRow(Icons.payment, 'Amount', '\$${customer.amountToBePaid.toStringAsFixed(2)}'),
+                  _buildDetailRow(Icons.payment, 'Amount'.tr, '\$${customer.amountToBePaid.toStringAsFixed(2)}'),
 
                   const SizedBox(height: 24),
 
@@ -404,7 +404,7 @@ class CustomerCard extends StatelessWidget {
                             customer.isCleaned ? Icons.cleaning_services_outlined : Icons.cleaning_services,
                             size: 18,
                           ),
-                          label: Text(customer.isCleaned ? 'En Attente' : 'Nettoyer'),
+                          label: Text(customer.isCleaned ? 'En Attente'.tr : 'Nettoyer'.tr),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: customer.isCleaned ? Colors.orange : Colors.green,
                             foregroundColor: Colors.white,

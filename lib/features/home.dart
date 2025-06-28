@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     Icon(Icons.refresh, color: Colors.orange),
                     SizedBox(width: 8),
-                    Text('Reset All Payments'),
+                    Text('Reset All Payments'.tr),
                   ],
                 ),
               ),
@@ -62,17 +62,17 @@ class HomePage extends StatelessWidget {
                   children: [
                     Icon(Icons.delete_forever, color: Colors.red),
                     SizedBox(width: 8),
-                    Text('Delete All Customers'),
+                    Text('Delete All Customers'.tr),
                   ],
                 ),
               ),
               PopupMenuItem(
-                value: 'schedule_notifications',
+                value: 'schedule_notifications'.tr,
                 child: Row(
                   children: [
                     Icon(Icons.notifications_active, color: Colors.blue),
                     SizedBox(width: 8),
-                    Text('Schedule All Reminders'),
+                    Text('Schedule All Reminders'.tr),
                   ],
                 ),
               ),
@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       TextField(
                         decoration: InputDecoration(
-                          hintText: 'Search customers...',
+                          hintText: 'Search customers...'.tr,
                           prefixIcon: Icon(Icons.search),
                           filled: true,
                           fillColor: Colors.white,
@@ -161,7 +161,7 @@ class HomePage extends StatelessWidget {
                               onChanged: (value) =>
                                   homeController.setServiceFilter(value!),
                               decoration: InputDecoration(
-                                labelText: 'Service Type',
+                                labelText: 'Service Type'.tr,
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
@@ -188,7 +188,7 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Upcoming Services",
+                        "Upcoming Services".tr,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18.sp,
@@ -196,7 +196,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${homeController.filteredCustomers.length} customers",
+                        "${homeController.filteredCustomers.length} clients".tr,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade600,
@@ -285,7 +285,7 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            'No customers found',
+            'No customers found'.tr,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -294,7 +294,7 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            'Try adjusting your filters or add a new customer',
+            'Try adjusting your filters or add a new customer'.tr,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey.shade500,

@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:oasis_eclat/data/models/customer_model.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -68,7 +69,7 @@ class NotificationService {
         await _schedule1HourReminder(customer, serviceTime);
       }
     } catch (e) {
-      print('Error scheduling service reminder for ${customer.customerName}: $e');
+      print('Error scheduling service reminder for ${customer.customerName}: $e'.tr);
     }
   }
 
@@ -79,10 +80,10 @@ class NotificationService {
 
     // Only schedule if reminder time is in the future
     if (reminderTime.isAfter(now)) {
-      const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-        'service_reminders_24h',
+       AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+        'service_reminders_24h'.tr,
         '24-Hour Service Reminders',
-        channelDescription: '24-hour advance reminders for cleaning services',
+        channelDescription: '24-hour advance reminders for cleaning services'.tr,
         importance: Importance.high,
         priority: Priority.high,
         icon: '@drawable/ic_launcher',
@@ -94,7 +95,7 @@ class NotificationService {
         sound: 'default',
       );
 
-      const NotificationDetails platformDetails = NotificationDetails(
+       NotificationDetails platformDetails = NotificationDetails(
         android: androidDetails,
         iOS: iosDetails,
       );
@@ -104,8 +105,8 @@ class NotificationService {
 
       await _notificationsPlugin!.zonedSchedule(
         notificationId,
-        '🧹 Service Reminder - Tomorrow',
-        'Hi ${customer.customerName}! Your ${customer.service} service is scheduled for tomorrow at ${_formatTime(serviceTime)}.\nLocation: ${customer.address}',
+        '🧹 Service Reminder - Tomorrow'.tr,
+        'Hi ${customer.customerName}! Your ${customer.service} service is scheduled for tomorrow at ${_formatTime(serviceTime)}.\nLocation: ${customer.address}'.tr,
         reminderTime,
         platformDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -120,10 +121,10 @@ class NotificationService {
 
     // Only schedule if reminder time is in the future
     if (reminderTime.isAfter(now)) {
-      const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-        'service_reminders_1h',
-        '1-Hour Service Reminders',
-        channelDescription: '1-hour advance reminders for cleaning services',
+       AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+        'service_reminders_1h'.tr,
+        '1-Hour Service Reminders'.tr,
+        channelDescription: '1-hour advance reminders for cleaning services'.tr,
         importance: Importance.max,
         priority: Priority.max,
         icon: '@drawable/ic_launcher',
@@ -132,14 +133,14 @@ class NotificationService {
         fullScreenIntent: true, // Make it more prominent
       );
 
-      const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+       DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
         sound: 'default',
         presentAlert: true,
         presentBadge: true,
         presentSound: true,
       );
 
-      const NotificationDetails platformDetails = NotificationDetails(
+       NotificationDetails platformDetails = NotificationDetails(
         android: androidDetails,
         iOS: iosDetails,
       );
@@ -149,8 +150,8 @@ class NotificationService {
 
       await _notificationsPlugin!.zonedSchedule(
         notificationId,
-        '🧹 Service Alert - 1 Hour!',
-        'Hi ${customer.customerName}! Your ${customer.service} service starts in 1 hour.\nLocation: ${customer.address}\nAmount: \$${customer.amountToBePaid.toStringAsFixed(2)}',
+        '🧹 Service Alert - 1 Hour!'.tr,
+        'Hi ${customer.customerName}! Your ${customer.service} service starts in 1 hour.\nLocation: ${customer.address}\nAmount: \$${customer.amountToBePaid.toStringAsFixed(2)}'.tr,
         reminderTime,
         platformDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -162,7 +163,7 @@ class NotificationService {
   String _formatTime(tz.TZDateTime dateTime) {
     final hour = dateTime.hour;
     final minute = dateTime.minute;
-    final period = hour >= 12 ? 'PM' : 'AM';
+    final period = hour >= 12 ? 'PM': 'AM';
     final displayHour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
     final displayMinute = minute.toString().padLeft(2, '0');
     return '$displayHour:$displayMinute $period';
@@ -182,34 +183,34 @@ class NotificationService {
 
   // Show immediate test notification
   Future<void> showTestNotification() async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'test',
-      'Test Notifications',
+     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'test'.tr,
+      'Test Notifications'.tr,
       importance: Importance.high,
       priority: Priority.high,
     );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
 
-    const NotificationDetails platformDetails = NotificationDetails(
+     NotificationDetails platformDetails = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
 
     await _notificationsPlugin!.show(
       0,
-      'Test Notification',
-      'Your notifications are working!',
+      'Test Notification'.tr,
+      'Your notifications are working!'.tr,
       platformDetails,
     );
   }
 
   // Show immediate test notification for a specific customer
   Future<void> showTestCustomerNotification(Customer customer) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'test_customer',
-      'Test Customer Notifications',
-      channelDescription: 'Test notifications for specific customers',
+     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'test_customer'.tr,
+      'Test Customer Notifications'.tr,
+      channelDescription: 'Test notifications for specific customers'.tr,
       importance: Importance.high,
       priority: Priority.high,
       playSound: true,
@@ -220,7 +221,7 @@ class NotificationService {
       sound: 'default',
     );
 
-    const NotificationDetails platformDetails = NotificationDetails(
+     NotificationDetails platformDetails = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
@@ -230,8 +231,8 @@ class NotificationService {
 
     await _notificationsPlugin!.show(
       testNotificationId,
-      '🧹 Service Reminder (Test)',
-      'Hi ${customer.customerName}! Your ${customer.service} service is scheduled.\nLocation: ${customer.address}\nAmount: \$${customer.amountToBePaid.toStringAsFixed(2)}',
+      '🧹 Service Reminder (Test)'.tr,
+      'Hi ${customer.customerName}! Your ${customer.service} service is scheduled.\nLocation: ${customer.address}\nAmount: \$${customer.amountToBePaid.toStringAsFixed(2)}'.tr,
       platformDetails,
     );
   }
@@ -243,10 +244,10 @@ class NotificationService {
     required String body,
     required DateTime scheduledTime,
   }) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'custom_reminders',
+     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'custom_reminders'.tr,
       'Custom Service Reminders',
-      channelDescription: 'Custom reminders for cleaning services',
+      channelDescription: 'Custom reminders for cleaning services'.tr,
       importance: Importance.high,
       priority: Priority.high,
       playSound: true,
@@ -257,7 +258,7 @@ class NotificationService {
       sound: 'default',
     );
 
-    const NotificationDetails platformDetails = NotificationDetails(
+     NotificationDetails platformDetails = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
@@ -308,10 +309,10 @@ class NotificationService {
 
   // Show immediate service reminder (for testing or manual trigger)
   Future<void> showImmediateServiceReminder(Customer customer) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'immediate_service',
+     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'immediate_service'.tr,
       'Immediate Service Reminders',
-      channelDescription: 'Immediate reminders for cleaning services',
+      channelDescription: 'Immediate reminders for cleaning services'.tr,
       importance: Importance.max,
       priority: Priority.max,
       playSound: true,
@@ -326,15 +327,15 @@ class NotificationService {
       presentSound: true,
     );
 
-    const NotificationDetails platformDetails = NotificationDetails(
+     NotificationDetails platformDetails = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
 
     await _notificationsPlugin!.show(
       (customer.id ?? 0) + 50000, // Use high ID to avoid conflicts
-      '🧹 Service Time!',
-      'Hi ${customer.customerName}! Your ${customer.service} service is now.\nLocation: ${customer.address}',
+      '🧹 Service Time!'.tr,
+      'Hi ${customer.customerName}! Your ${customer.service} service is now.\nLocation: ${customer.address}'.tr,
       platformDetails,
     );
   }

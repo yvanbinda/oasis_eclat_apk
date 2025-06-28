@@ -106,8 +106,8 @@ class _EditCustFormState extends State<EditCustForm> {
       if (!_homeController.isUpdatingCustomer.value) {
         Get.back();
         Get.snackbar(
-          'Success',
-          'Customer updated successfully',
+          'Success'.tr,
+          'Customer updated successfully'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
@@ -119,7 +119,7 @@ class _EditCustFormState extends State<EditCustForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Customer'),
+        title:  Text('Edit Customer'.tr),
         backgroundColor: Colors.teal.shade600,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -140,8 +140,8 @@ class _EditCustFormState extends State<EditCustForm> {
                   child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      labelText: 'Customer Name',
-                      hintText: 'Enter customer name',
+                      labelText: 'Customer Name'.tr,
+                      hintText: 'Enter customer name'.tr,
                       prefixIcon: Icon(Icons.person, color: Colors.orange.shade600),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -152,10 +152,10 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter the customer name';
+                        return 'Please enter the customer name'.tr;
                       }
                       if (value.trim().length < 2) {
-                        return 'Customer name must be at least 2 characters';
+                        return 'Customer name must be at least 2 characters'.tr;
                       }
                       return null;
                     },
@@ -171,8 +171,8 @@ class _EditCustFormState extends State<EditCustForm> {
                   child: TextFormField(
                     controller: _serviceController,
                     decoration: InputDecoration(
-                      labelText: 'Service',
-                      hintText: 'e.g., Residential Cleaning',
+                      labelText: 'Service'.tr,
+                      hintText: 'e.g., Residential Cleaning'.tr,
                       prefixIcon: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -183,7 +183,7 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter the service type';
+                        return 'Please enter the service type'.tr;
                       }
                       return null;
                     },
@@ -200,7 +200,7 @@ class _EditCustFormState extends State<EditCustForm> {
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      labelText: 'Phone Number',
+                      labelText: 'Phone Number'.tr,
                       hintText: 'e.g., +1 234 567 8900',
                       prefixIcon: Icon(Icons.phone, color: Colors.orange.shade600),
                       border: OutlineInputBorder(
@@ -212,10 +212,10 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter the phone number';
+                        return 'Please enter the phone number'.tr;
                       }
                       if (value.trim().length < 10) {
-                        return 'Please enter a valid phone number';
+                        return 'Please enter a valid phone number'.tr;
                       }
                       return null;
                     },
@@ -231,8 +231,8 @@ class _EditCustFormState extends State<EditCustForm> {
                     controller: _addressController,
                     maxLines: 2,
                     decoration: InputDecoration(
-                      labelText: 'Address',
-                      hintText: 'Enter service address',
+                      labelText: 'Address'.tr,
+                      hintText: 'Enter service address'.tr,
                       prefixIcon: Icon(Icons.location_on, color: Colors.orange.shade600),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -243,7 +243,7 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter the service address';
+                        return 'Please enter the service address'.tr;
                       }
                       return null;
                     },
@@ -260,7 +260,7 @@ class _EditCustFormState extends State<EditCustForm> {
                     controller: _amountController,
                     keyboardType: const TextInputType.numberWithOptions(decimal: true),
                     decoration: InputDecoration(
-                      labelText: 'Amount to be Paid',
+                      labelText: 'Amount to be Paid'.tr,
                       hintText: 'e.g., 150.00',
                       prefixIcon: Icon(Icons.attach_money, color: Colors.orange.shade600),
                       border: OutlineInputBorder(
@@ -272,14 +272,14 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter the amount';
+                        return 'Please enter the amount'.tr;
                       }
                       final amount = double.tryParse(value.trim());
                       if (amount == null) {
-                        return 'Please enter a valid amount';
+                        return 'Please enter a valid amount'.tr;
                       }
                       if (amount <= 0) {
-                        return 'Amount must be greater than 0';
+                        return 'Amount must be greater than 0'.tr;
                       }
                       return null;
                     },
@@ -298,7 +298,7 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     child: ListTile(
                       leading: Icon(Icons.event, color: Colors.orange.shade600),
-                      title: const Text('Service Date & Time'),
+                      title:  Text('Service Date & Time'.tr),
                       subtitle: Text(_formatDateTime(_selectedDateTime)),
                       trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: _selectDateTime,
@@ -318,8 +318,8 @@ class _EditCustFormState extends State<EditCustForm> {
                     ),
                     child: SwitchListTile(
                       secondary: Icon(Icons.cleaning_services, color: Colors.orange.shade600),
-                      title: const Text('Payment Status'),
-                      subtitle: Text(_isCleaned ? 'Cleaned' : 'UnCleaned'),
+                      title:  Text('Payment Status'.tr),
+                      subtitle: Text(_isCleaned ? 'Cleaned'.tr : 'UnCleaned'.tr),
                       value: _isCleaned,
                       onChanged: (bool value) {
                         setState(() {
@@ -358,8 +358,8 @@ class _EditCustFormState extends State<EditCustForm> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                              : const Text(
-                            'Ajouter',
+                              : Text(
+                            'Ajouter'.tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -379,8 +379,8 @@ class _EditCustFormState extends State<EditCustForm> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const Text(
-                            'Annuler',
+                          child:  Text(
+                            'Annuler'.tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,

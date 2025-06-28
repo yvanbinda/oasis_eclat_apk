@@ -43,7 +43,7 @@ class HomeController extends GetxController {
     try {
       await _notificationService.initialize();
     } catch (e) {
-      print('Failed to initialize notifications: $e');
+      print('Failed to initialize notifications: $e'.tr);
     }
   }
 
@@ -57,7 +57,7 @@ class HomeController extends GetxController {
       customers.value = allCustomers;
       _applyFilters();
     } catch (e) {
-      _showErrorSnackbar('Failed to load customers: $e');
+      _showErrorSnackbar('Failed to load customers: $e'.tr);
     } finally {
       isLoadingCustomers.value = false;
     }
@@ -98,10 +98,10 @@ class HomeController extends GetxController {
         await loadCustomers(); // Refresh the list
         await loadCustomerStatistics(); // Refresh statistics
 
-        _showSuccessSnackbar('Customer added successfully!');
+        _showSuccessSnackbar('Customer added successfully!'.tr);
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to add customer: $e');
+      _showErrorSnackbar('Failed to add customer: $e'.tr);
     } finally {
       isAddingCustomer.value = false;
     }
@@ -121,10 +121,10 @@ class HomeController extends GetxController {
         await loadCustomers(); // Refresh the list
         await loadCustomerStatistics(); // Refresh statistics
 
-        _showSuccessSnackbar('Customer updated successfully!');
+        _showSuccessSnackbar('Customer updated successfully!'.tr);
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to update customer: $e');
+      _showErrorSnackbar('Failed to update customer: $e'.tr);
     } finally {
       isUpdatingCustomer.value = false;
     }
@@ -151,13 +151,13 @@ class HomeController extends GetxController {
 
         final customer = customers.firstWhere((c) => c.id == customerId);
         _showSuccessSnackbar(
-          customer.isCleaned ? 'Service marked as cleaned!' : 'Service marked as not Cleaned!',
+          customer.isCleaned ? 'Service marked as cleaned!'.tr : 'Service marked as not Cleaned!'.tr,
           backgroundColor: customer.isCleaned ? Colors.green.shade100 : Colors.orange.shade100,
           textColor: customer.isCleaned ? Colors.green.shade800 : Colors.orange.shade800,
         );
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to update cleaning status: $e');
+      _showErrorSnackbar('Failed to update cleaning status: $e'.tr);
     } finally {
       isUpdatingCustomer.value = false;
     }
@@ -174,17 +174,17 @@ class HomeController extends GetxController {
       // Show confirmation dialog
       final bool? confirmed = await Get.dialog<bool>(
         AlertDialog(
-          title: const Text('Delete Customer'),
-          content: const Text('Are you sure you want to delete this customer? This action cannot be undone.'),
+          title:  Text('Delete Customer'.tr),
+          content:  Text('Are you sure you want to delete this customer? This action cannot be undone.'.tr),
           actions: [
             TextButton(
               onPressed: () => Get.back(result: false),
-              child: const Text('Cancel'),
+              child:  Text('Cancel'.tr),
             ),
             TextButton(
               onPressed: () => Get.back(result: true),
               style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: const Text('Delete'),
+              child:  Text('Delete'.tr),
             ),
           ],
         ),
@@ -202,11 +202,11 @@ class HomeController extends GetxController {
           await loadCustomers(); // Refresh the list
           await loadCustomerStatistics(); // Refresh statistics
 
-          _showSuccessSnackbar('Customer deleted successfully!');
+          _showSuccessSnackbar('Customer deleted successfully!'.tr);
         }
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to delete customer: $e');
+      _showErrorSnackbar('Failed to delete customer: $e'.tr);
     } finally {
       isDeletingCustomer.value = false;
     }
@@ -255,7 +255,7 @@ class HomeController extends GetxController {
         'averageServiceValue': totalCount > 0 ? (totalRevenue + pendingAmount) / totalCount : 0.0,
       };
     } catch (e) {
-      print('Failed to load statistics: $e');
+      print('Failed to load statistics: $e'.tr);
       customerStats.value = {
         'totalCustomers': 0,
         'cleanedCustomers': 0,
@@ -346,17 +346,17 @@ class HomeController extends GetxController {
     try {
       final bool? confirmed = await Get.dialog<bool>(
         AlertDialog(
-          title: const Text('Reset All Services'),
-          content: const Text('Are you sure you want to mark all customers as NotCleaned? This action cannot be undone.'),
+          title:  Text('Reset All Services'.tr),
+          content:  Text('Are you sure you want to mark all customers as NotCleaned? This action cannot be undone.'.tr),
           actions: [
             TextButton(
               onPressed: () => Get.back(result: false),
-              child: const Text('Cancel'),
+              child:  Text('Cancel'.tr),
             ),
             TextButton(
               onPressed: () => Get.back(result: true),
               style: TextButton.styleFrom(foregroundColor: Colors.orange),
-              child: const Text('Reset'),
+              child:  Text('Reset'.tr),
             ),
           ],
         ),
@@ -367,10 +367,10 @@ class HomeController extends GetxController {
         await loadCustomers();
         await loadCustomerStatistics();
 
-        _showSuccessSnackbar('All payments reset to notCleaned!');
+        _showSuccessSnackbar('All payments reset to notCleaned!'.tr);
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to reset payment statuses: $e');
+      _showErrorSnackbar('Failed to reset payment statuses: $e'.tr);
     }
   }
 
@@ -378,9 +378,9 @@ class HomeController extends GetxController {
   Future<void> exportCustomerData() async {
     try {
       // TODO: Implement CSV export functionality
-      _showInfoSnackbar('Export functionality coming soon!');
+      _showInfoSnackbar('Export functionality coming soon!'.tr);
     } catch (e) {
-      _showErrorSnackbar('Failed to export data: $e');
+      _showErrorSnackbar('Failed to export data: $e'.tr);
     }
   }
 
@@ -390,9 +390,9 @@ class HomeController extends GetxController {
   Future<void> testCustomerNotification(Customer customer) async {
     try {
       await _notificationService.showTestCustomerNotification(customer);
-      _showInfoSnackbar('Test notification sent for ${customer.customerName}!');
+      _showInfoSnackbar('Test notification sent for ${customer.customerName}!'.tr);
     } catch (e) {
-      _showErrorSnackbar('Failed to send test notification: $e');
+      _showErrorSnackbar('Failed to send test notification: $e'.tr);
     }
   }
 
@@ -404,9 +404,9 @@ class HomeController extends GetxController {
           await _notificationService.scheduleServiceReminder(customer);
         }
       }
-      _showSuccessSnackbar('Notifications scheduled for all customers!');
+      _showSuccessSnackbar('Notifications scheduled for all customers!'.tr);
     } catch (e) {
-      _showErrorSnackbar('Failed to schedule notifications: $e');
+      _showErrorSnackbar('Failed to schedule notifications: $e'.tr);
     }
   }
 
@@ -414,9 +414,9 @@ class HomeController extends GetxController {
   Future<void> cancelAllNotifications() async {
     try {
       await _notificationService.cancelAllNotifications();
-      _showSuccessSnackbar('All notifications cancelled!');
+      _showSuccessSnackbar('All notifications cancelled!'.tr);
     } catch (e) {
-      _showErrorSnackbar('Failed to cancel notifications: $e');
+      _showErrorSnackbar('Failed to cancel notifications: $e'.tr);
     }
   }
 
@@ -434,7 +434,7 @@ class HomeController extends GetxController {
 
   void _showSuccessSnackbar(String message, {Color? backgroundColor, Color? textColor}) {
     Get.snackbar(
-      'Success',
+      'Success'.tr,
       message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: backgroundColor ?? Colors.green.shade100,
@@ -445,7 +445,7 @@ class HomeController extends GetxController {
 
   void _showErrorSnackbar(String message) {
     Get.snackbar(
-      'Error',
+      'Error'.tr,
       message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.red.shade100,
@@ -456,7 +456,7 @@ class HomeController extends GetxController {
 
   void _showInfoSnackbar(String message) {
     Get.snackbar(
-      'Info',
+      'Info'.tr,
       message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.blue.shade100,

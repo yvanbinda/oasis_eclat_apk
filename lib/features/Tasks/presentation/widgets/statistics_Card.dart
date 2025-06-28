@@ -34,7 +34,7 @@ class CustomerStatsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _StatsItem(
-                'Total',
+                'Total'.tr,
                 homeController.customerStats['totalCustomers'].toString(),
                 Icons.people,
               ),
@@ -44,7 +44,7 @@ class CustomerStatsCard extends StatelessWidget {
                 color: Colors.white.withOpacity(0.3),
               ),
               _StatsItem(
-                'Nettoyer',
+                'Nettoyer'.tr,
                 homeController.customerStats['cleanedCustomers'].toString(),
                 Icons.cleaning_services_outlined,
               ),
@@ -54,7 +54,7 @@ class CustomerStatsCard extends StatelessWidget {
                 color: Colors.white.withOpacity(0.3),
               ),
               _StatsItem(
-                'En Attente',
+                'En Attente'.tr,
                 homeController.customerStats['uncleanedCustomers'].toString(),
                 Icons.remove_done_outlined,
               ),

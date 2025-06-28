@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
       themeMode: themeController.isDarkMode.value
           ? ThemeMode.dark
           : ThemeMode.light,
-      locale: const Locale('en', 'US'),
-      fallbackLocale: const Locale('en', 'US'),
+      locale:  Locale('fr', 'FR'),
+      fallbackLocale:  Locale('fr', 'Fr'),
       translations: Languages(),
       initialRoute: Routes.HOME,
       getPages: AppPages.routes,
